@@ -2,7 +2,7 @@
 FROM ccr.ccs.tencentyun.com/qcloud/ubuntu:dnstool
 
 # 安装必要的包
-RUN apt-get update && apt-get upgrade
+RUN apt-get update && apt-get upgrade -y
 
 # 设置入口点为 /bin/sh 以便进行交互式 shell
 ENTRYPOINT ["/bin/bash"]

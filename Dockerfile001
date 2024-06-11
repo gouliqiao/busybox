@@ -1,8 +1,8 @@
-# 使用 debian 镜像
-FROM ccr.ccs.tencentyun.com/digua/debian:latest
+# 使用 Ubuntu 镜像
+FROM ccr.ccs.tencentyun.com/qcloud/ubuntu:dnstool
 
 # 安装必要的包
-RUN apt-get update 
+RUN apt-get update && apt-get upgrade
 
 # 设置入口点为 /bin/sh 以便进行交互式 shell
 ENTRYPOINT ["/bin/bash"]

@@ -2,8 +2,10 @@
 FROM busybox:latest
 
 # Install necessary packages
-RUN mkdir -p /rootfs \
-    && wget -O - http://archive.ubuntu.com/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.123_all.deb \
+RUN mkdir -p /var/lib/dpkg \
+    && touch /var/lib/dpkg/status \
+    && mkdir -p /rootfs \
+    && wget -O - http://archive.ubuntu.com/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.123+nmu1_all.deb \
     | busybox dpkg -i - \
     && busybox debootstrap --variant=minbase --arch=amd64 focal /rootfs http://archive.ubuntu.com/ubuntu/ \
     && busybox chroot /rootfs /bin/sh -c "apt-get update && apt-get install -y net-tools dnsutils iputils-ping iproute2" \

@@ -1,0 +1,2 @@
+FROM Ubuntu
+#拉取最新版的Ubuntu,从官方

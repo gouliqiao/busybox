@@ -2,14 +2,7 @@
 FROM ccr.ccs.tencentyun.com/digua/debian:latest
 
 # 安装必要的包
-RUN apt-get update \
-    && apt-get install -y wget debootstrap net-tools dnsutils iputils-ping iproute2 \
-    && mkdir -p /rootfs \
-    && debootstrap --variant=minbase --arch=amd64 focal /rootfs http://archive.ubuntu.com/ubuntu/ \
-    && chroot /rootfs /bin/sh -c "apt-get update && apt-get install -y net-tools dnsutils iputils-ping iproute2" \
-    && cp -a /rootfs/bin /rootfs/sbin /rootfs/usr /rootfs/lib / \
-    && rm -rf /rootfs \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update 
 
 # 设置入口点为 /bin/sh 以便进行交互式 shell
 ENTRYPOINT ["/bin/bash"]

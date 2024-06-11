@@ -1,8 +1,4 @@
-# 使用 Ubuntu 镜像
-FROM ccr.ccs.tencentyun.com/qcloud/ubuntu:dnstool
+# 使用 busybox 镜像
+FROM busybox
 
-# 安装必要的包
-RUN apt-get update && apt-get upgrade -y
-
-# 设置入口点为 /bin/sh 以便进行交互式 shell
-ENTRYPOINT ["/bin/bash"]
+#单纯拉取busybox的最新版镜像

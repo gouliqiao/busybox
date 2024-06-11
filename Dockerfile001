@@ -1,5 +1,5 @@
 # 使用 debian 镜像
-FROM debian:latest
+FROM ccr.ccs.tencentyun.com/digua/debian:latest
 
 # 安装必要的包
 RUN apt-get update \

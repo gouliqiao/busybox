@@ -5,7 +5,7 @@ FROM busybox:latest
 RUN mkdir -p /var/lib/dpkg \
     && touch /var/lib/dpkg/status \
     && mkdir -p /rootfs \
-    && wget http://mirrors.aliyun.com/debian/pool/main/d/debootstrap/debootstrap_1.0.123+nmu1_all.deb -O /tmp/debootstrap.deb \
+    && wget http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.134_all.deb -O /tmp/debootstrap.deb \
     && busybox dpkg -i /tmp/debootstrap.deb \
     && busybox debootstrap --variant=minbase --arch=amd64 focal /rootfs http://archive.ubuntu.com/ubuntu/ \
     && busybox chroot /rootfs /bin/sh -c "apt-get update && apt-get install -y net-tools dnsutils iputils-ping iproute2" \

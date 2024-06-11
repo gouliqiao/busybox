@@ -1,18 +1,15 @@
-# Use the official busybox image as the base image
-FROM busybox:latest
+# 使用 debian 镜像
+FROM debian:latest
 
-# Install necessary packages
-RUN mkdir -p /var/lib/dpkg \
-    && touch /var/lib/dpkg/status \
+# 安装必要的包
+RUN apt-get update \
+    && apt-get install -y wget debootstrap net-tools dnsutils iputils-ping iproute2 \
     && mkdir -p /rootfs \
-    && wget http://ftp.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.134_all.deb -O /tmp/debootstrap.deb \
-    && busybox dpkg -i /tmp/debootstrap.deb \
-    && busybox debootstrap --variant=minbase --arch=amd64 focal /rootfs http://archive.ubuntu.com/ubuntu/ \
-    && busybox chroot /rootfs /bin/sh -c "apt-get update && apt-get install -y net-tools dnsutils iputils-ping iproute2" \
+    && debootstrap --variant=minbase --arch=amd64 focal /rootfs http://archive.ubuntu.com/ubuntu/ \
+    && chroot /rootfs /bin/sh -c "apt-get update && apt-get install -y net-tools dnsutils iputils-ping iproute2" \
     && cp -a /rootfs/bin /rootfs/sbin /rootfs/usr /rootfs/lib / \
     && rm -rf /rootfs \
-    && busybox rm -rf /var/lib/apt/lists/* \
-    && rm /tmp/debootstrap.deb
+    && rm -rf /var/lib/apt/lists/*
 
-# Set the entrypoint to /bin/sh for an interactive shell
-ENTRYPOINT ["/bin/sh"]
+# 设置入口点为 /bin/sh 以便进行交互式 shell
+ENTRYPOINT ["/bin/bash"]

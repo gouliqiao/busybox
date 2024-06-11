@@ -1,0 +1,3 @@
+FROM nginx
+LABEL maintainers="middleware"
+LABEL description="官方nginx基础镜像基于alpine3.19制作"

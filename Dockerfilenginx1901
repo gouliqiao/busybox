@@ -5,6 +5,9 @@ FROM ubuntu:22.04
 LABEL maintainers="system"
 LABEL description="基础镜像"
 
+# 安装 ca-certificates 以确保系统能够验证 SSL 证书
+RUN apt-get update && apt-get install -y ca-certificates
+
 # Update the sources.list to use Aliyun mirrors
 RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list && \
     sed -i 's|http://security.ubuntu.com/ubuntu/|https://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list
